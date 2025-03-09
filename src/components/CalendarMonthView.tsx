@@ -5,6 +5,7 @@ import { formatDateToYYYYMMDD } from "../utils/dateUtils";
 import { useMemo } from "react";
 import { CalendarEvent } from "../types/calendar.types";
 import { setSelectedDate } from "../store/calendarSlice";
+import { dayLabels } from "../constants/dateConstants";
 interface DayCell {
   date: Date;
   dateString: string;
@@ -121,7 +122,6 @@ const CalendarMonthView = () => {
     handleAddEvent(dateString);
   };
 
-  const dayLabels = ["일", "월", "화", "수", "목", "금", "토"];
   return (
     <div className="h-full overflow-auto">
       {/* 요일 헤더 */}

@@ -11,28 +11,10 @@ import { formatDateToReadable } from "../utils/dateUtils";
 import ArrowButton from "./ui/ArrowButton";
 
 const CalendarHeader = () => {
-  const { selectedDate, currentView, displayMonth, displayYear } = useSelector(
+  const { selectedDate, currentView } = useSelector(
     (state: RootState) => state.calendar,
   );
   const dispatch = useDispatch();
-
-  // 월 이름 배열
-  const monthNames = [
-    "1월",
-    "2월",
-    "3월",
-    "4월",
-    "5월",
-    "6월",
-    "7월",
-    "8월",
-    "9월",
-    "10월",
-    "11월",
-    "12월",
-  ];
-
-  const currentMonth = monthNames[displayMonth];
 
   const handleViewChange = (view: "week" | "month") => {
     dispatch(setCurrentView(view));

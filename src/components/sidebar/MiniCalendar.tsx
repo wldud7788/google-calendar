@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { navigateToMonth, setSelectedDate } from "../../store/calendarSlice";
 import { formatDateToYYYYMMDD } from "../../utils/dateUtils";
 import ArrowButton from "../ui/ArrowButton";
+import { dayLabels } from "../../constants/dateConstants";
 
 const MiniCalendar = () => {
   const { selectedDate, displayMonth, displayYear } = useSelector(
@@ -136,9 +137,6 @@ const MiniCalendar = () => {
     }
     return days;
   };
-
-  // 요일 배열
-  const dayLabels = ["일", "월", "화", "수", "목", "금", "토"];
 
   return (
     <div className="rounded bg-white p-4 shadow">
