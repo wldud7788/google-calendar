@@ -7,7 +7,7 @@ interface CalendarWeekViewTopProps {
 const CalendarWeekViewTop = ({ weekData }: CalendarWeekViewTopProps) => {
   return (
     <div className="grid grid-cols-8 border-b">
-      <div className="py-2 text-center font-medium border-r"></div>
+      <div className="border-r py-2 text-center font-medium"></div>
       {weekData.map((day, index) => {
         // 주말 여부 확인 (0 = 일요일, 6 = 토요일)
         const isWeekend = index === 0 || index === 6;
@@ -17,18 +17,14 @@ const CalendarWeekViewTop = ({ weekData }: CalendarWeekViewTopProps) => {
         return (
           <div
             key={index}
-            className={`py-2 text-center font-medium border-r last:border-r-0 
-                ${day.isToday ? "bg-blue-50" : ""} 
-                ${isWeekend ? "text-red-500" : "text-gray-700"}
-                ${!day.isCurrentMonth ? "text-gray-400" : ""}
-                `}
+            className={`border-r py-2 text-center font-medium last:border-r-0 ${day.isToday ? "bg-blue-50" : ""} ${isWeekend ? "text-red-500" : "text-gray-700"} ${!day.isCurrentMonth ? "text-gray-400" : ""} `}
           >
             {/* 요일 및 날짜 */}
             <div>{dayName}</div>
             <div
               className={`${
                 day.isToday
-                  ? "bg-blue-500 text-white w-8 h-8 rounded-full justify-center inline-flex items-center"
+                  ? "inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white"
                   : ""
               }`}
             >

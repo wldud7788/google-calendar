@@ -1,18 +1,16 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { getWeekData } from "../utils/dateUtils";
-import CalendarWeekViewTop from "./calendarWeekView/CalendarWeekViewTop";
-import CalendarWeekGrid from "./calendarWeekView/CalendarWeekGrid";
 import EventModal from "./EventModal";
 import { useEffect, useState } from "react";
 import CalendarMonthView from "./CalendarMonthView";
+import CalendarWeekView from "./CalendarWeekView";
 
 const CalendarView = () => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [eventDate, setEventDate] = useState<string>("");
   const [eventTime, setEventTime] = useState<string>("09:00");
 
-  const { selectedDate, events, currentView } = useSelector(
+  const { selectedDate, currentView } = useSelector(
     (state: RootState) => state.calendar,
   );
 
@@ -32,17 +30,12 @@ const CalendarView = () => {
     };
   }, [selectedDate]);
 
-  // 현재 선택된 날짜의 주간 데이터
-  const weekData = getWeekData(selectedDate, events);
   return (
     <div className="flex-1 overflow-auto">
       <div className="flex h-full flex-col">
         {currentView === "week" ? (
           <>
-            {/* 주간뷰 상단 요일*/}
-            <CalendarWeekViewTop weekData={weekData} />
-            {/* 주간뷰 메인 */}
-            <CalendarWeekGrid weekData={weekData} />
+            <CalendarWeekView />
           </>
         ) : (
           <CalendarMonthView />

@@ -21,3 +21,12 @@ export type WeekDay = {
 };
 
 export type Week = WeekDay[];
+
+export interface DayCell {
+  date: Date;
+  dateString: string;
+  day: number;
+  isToday: boolean;
+  isCurrentMonth: boolean;
+  events: CalendarEvent[];
+}
