@@ -34,22 +34,55 @@ const calendarSlice = createSlice({
       state.displayYear = date.getFullYear();
     },
 
-    // 이전 주로 이동
+    // 이전 주/월 로 이동
     navigateToPreviousWeek: (state) => {
-      const date = new Date(state.selectedDate);
-      date.setDate(date.getDate() - 7);
-      state.selectedDate = date.toISOString().split("T")[0];
-      state.displayMonth = date.getMonth();
-      state.displayYear = date.getFullYear();
+      if (state.currentView === "week") {
+        const date = new Date(state.selectedDate);
+        date.setDate(date.getDate() - 7);
+        state.selectedDate = date.toISOString().split("T")[0];
+        state.displayMonth = date.getMonth();
+        state.displayYear = date.getFullYear();
+      } else {
+        let newMonth = state.displayMonth - 1;
+        let newYear = state.displayYear;
+
+        if (newMonth < 0) {
+          newMonth = 11;
+          newYear -= 1;
+        }
+
+        state.displayMonth = newMonth;
+        state.displayYear = newYear;
+
+        // 해당 월의 1일로 선택된 날짜 변경
+        const newDate = new Date(newYear, newMonth, 1);
+        state.selectedDate = newDate.toISOString().split("T")[0];
+      }
     },
 
-    // 다음 주로 이동
+    // 다음 주/월 로 이동
     navigateToNextWeek: (state) => {
-      const date = new Date(state.selectedDate);
-      date.setDate(date.getDate() + 7);
-      state.selectedDate = date.toISOString().split("T")[0];
-      state.displayMonth = date.getMonth();
-      state.displayYear = date.getFullYear();
+      if (state.currentView === "week") {
+        const date = new Date(state.selectedDate);
+        date.setDate(date.getDate() + 7);
+        state.selectedDate = date.toISOString().split("T")[0];
+        state.displayMonth = date.getMonth();
+        state.displayYear = date.getFullYear();
+      } else {
+        let newMonth = state.displayMonth + 1;
+        let newYear = state.displayYear;
+
+        if (newMonth > 11) {
+          newMonth = 0;
+          newYear += 1;
+        }
+
+        state.displayMonth = newMonth;
+        state.displayYear = newYear;
+
+        const newDate = new Date(newYear, newMonth, 1);
+        state.selectedDate = newDate.toISOString().split("T")[0];
+      }
     },
 
     // 오늘로 이동
@@ -68,6 +101,11 @@ const calendarSlice = createSlice({
       state.displayYear = action.payload.year;
       state.displayMonth = action.payload.month;
     },
+
+    // 캘린더 뷰 변경
+    setCurrentView: (state, action: PayloadAction<"week" | "month">) => {
+      state.currentView = action.payload;
+    },
   },
 });
 
@@ -79,6 +117,7 @@ export const {
   navigateToNextWeek,
   navigateToToday,
   navigateToMonth,
+  setCurrentView,
 } = calendarSlice.actions;
 
 export default calendarSlice.reducer;

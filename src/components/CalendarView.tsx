@@ -5,13 +5,14 @@ import CalendarWeekViewTop from "./calendarWeekView/CalendarWeekViewTop";
 import CalendarWeekGrid from "./calendarWeekView/CalendarWeekGrid";
 import EventModal from "./EventModal";
 import { useEffect, useState } from "react";
+import CalendarMonthView from "./CalendarMonthView";
 
 const CalendarView = () => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [eventDate, setEventDate] = useState<string>("");
   const [eventTime, setEventTime] = useState<string>("09:00");
 
-  const { selectedDate, events } = useSelector(
+  const { selectedDate, events, currentView } = useSelector(
     (state: RootState) => state.calendar,
   );
 
@@ -36,10 +37,16 @@ const CalendarView = () => {
   return (
     <div className="flex-1 overflow-auto">
       <div className="flex h-full flex-col">
-        {/* 주간뷰 상단 요일*/}
-        <CalendarWeekViewTop weekData={weekData} />
-        {/* 주간뷰 메인 */}
-        <CalendarWeekGrid weekData={weekData} />
+        {currentView === "week" ? (
+          <>
+            {/* 주간뷰 상단 요일*/}
+            <CalendarWeekViewTop weekData={weekData} />
+            {/* 주간뷰 메인 */}
+            <CalendarWeekGrid weekData={weekData} />
+          </>
+        ) : (
+          <CalendarMonthView />
+        )}
         {/* 이벤트 모달 */}
         <EventModal
           date={eventDate}

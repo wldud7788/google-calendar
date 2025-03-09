@@ -8,7 +8,7 @@ export interface CalendarEvent {
 export interface CalendarState {
   events: CalendarEvent[];
   selectedDate: string; // ISO 문자열 형식 (YYYY-MM-DD)
-  currentView: "week"; // 추후 day, month 등 확장 가능
+  currentView: "week" | "month"; // 추후 day, month 등 확장 가능
   displayMonth: number;
   displayYear: number;
 }
