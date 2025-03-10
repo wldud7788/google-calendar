@@ -9,7 +9,7 @@ function App() {
   return (
     <Provider store={store}>
       <CalendarHeader />
-      <div className="flex h-screen flex-wrap bg-white">
+      <div className="flex h-screen flex-col items-center bg-white sm:flex-row sm:items-start">
         <SideBar />
         <CalendarView />
       </div>
