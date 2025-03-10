@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { formatTimeToISO } from "../utils/dateUtils";
 import { addEvent } from "../store/calendarSlice";
+import CloseButton from "./ui/CloseButton";
+import Button from "./ui/Button";
 
 interface EventModalProps {
   date: string;
@@ -116,25 +118,7 @@ const EventModal: React.FC<EventModalProps> = ({
       >
         <div className="flex items-center justify-between border-b p-4">
           <h2 className="text-lg font-semibold">일정 추가</h2>
-          <button
-            className="text-gray-500 hover:text-gray-700"
-            onClick={onClose}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+          <CloseButton onClose={onClose} />
         </div>
 
         <form onSubmit={handleSubmit} className="p-4">
@@ -193,19 +177,12 @@ const EventModal: React.FC<EventModalProps> = ({
           </div>
 
           <div className="flex justify-end space-x-3 border-t pt-3">
-            <button
-              type="button"
-              className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-              onClick={onClose}
-            >
-              취소
-            </button>
-            <button
-              type="submit"
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-            >
+            <Button variant="cancel" onClick={onClose}>
+              취소1
+            </Button>
+            <Button variant="primary" type="submit">
               저장
-            </button>
+            </Button>
           </div>
         </form>
       </div>

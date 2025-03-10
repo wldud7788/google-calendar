@@ -12,7 +12,7 @@ const CalendarWeekView = () => {
   const weekData = getWeekData(selectedDate, events);
   return (
     <>
-      {/* 주간뷰 상단 요일*/}
+      {/* 요일 헤더*/}
       <CalendarWeekViewTop weekData={weekData} />
       {/* 주간뷰 메인 */}
       <CalendarWeekGrid weekData={weekData} />
